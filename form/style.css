@@ -6,8 +6,9 @@
 body{
     min-height: 100vh;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     font-family: sans-serif;
+    flex-direction: column;
 }
 .container{
     margin: auto;
@@ -49,6 +50,20 @@ input{
     background-color: rgb(31, 29, 29);
     border-radius: 5px;
     padding: 2px;
+}
+.h33{
+    margin: auto;
+    padding: 10px;
+    bottom: 4px;
+}
+.h34{
+    margin: auto;
+    padding: 10px;
+    bottom: 4px;
+}
+.output{
+    bottom: 40px;
+    padding: 100px;
 }
 
 
