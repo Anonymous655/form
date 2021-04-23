@@ -1,41 +1,52 @@
-const name = document.getElementById('name');
+const btn = document.querySelector(".btn");
 
-const email = document.getElementById('email');
+const myForm = document.getElementById("my-form");
+const users = document.querySelector(".ul");
 
-const btn = document.querySelector('.btn');
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("vscodghbe");
+  var keys = Object.keys(localStorage);
+  let i = keys.length;
+  let stringified;
+  let people;
+  while (i--) {
+    if (keys[i].match(/user/g)) {
+      stringified = localStorage.getItem(keys[i]);
+      people = JSON.parse(stringified);
+      addThings(people);
+    }
+  }
+});
 
-const myForm = document.getElementById('my-form');
-const h33 = document.querySelector(".h33");
-const h34 = document.querySelector(".h34");
+btn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  btn.style.color = "red";
+  if (email.length > 0 && name.length > 0) {
+    const obj = {
+      name: name,
+      email: email,
+    };
+    console.log(obj);
+    localStorage.setItem("user" + email, JSON.stringify(obj));
+    addThings(obj);
+  }
+});
 
-myForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    console.log('Name : ' + name.value)
-    console.log('Email : ' + email.value)
-    
-    
-    
-} )
+function addThings(Objectt) {
+  const li = document.createElement("li");
+  li.appendChild(
+    document.createTextNode(`Name: ${Objectt.name} and Email: ${Objectt.email}`)
+  );
+  users.appendChild(li);
+}
 
-btn.addEventListener('click', (e) => {
-    e.preventDefault()
-    btn.style.color = 'red'
-    localStorage.setItem('name', name.value)
-    localStorage.setItem('email', email.value)
-    h33.textContent = localStorage.getItem('name')
-    h34.textContent = localStorage.getItem('email')
-    
-    // console.log(h33)
-})
-btn.addEventListener('mouseover', (e) => {
-    e.preventDefault()
-    btn.style.padding = '20px'
-})
-btn.addEventListener('mouseout', (e) => {
-    e.preventDefault()
-    btn.style.color = 'yellow'
-})
-
-
-
-
+btn.addEventListener("mouseover", (e) => {
+  e.preventDefault();
+  btn.style.padding = "20px";
+});
+btn.addEventListener("mouseout", (e) => {
+  e.preventDefault();
+  btn.style.color = "yellow";
+});
