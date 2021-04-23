@@ -3,8 +3,8 @@ const btn = document.querySelector(".btn");
 const myForm = document.getElementById("my-form");
 const users = document.querySelector(".ul");
 
+
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("vscodghbe");
   var keys = Object.keys(localStorage);
   let i = keys.length;
   let stringified;
@@ -20,15 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 btn.addEventListener("click", (e) => {
   e.preventDefault();
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
   btn.style.color = "red";
   if (email.length > 0 && name.length > 0) {
-    const obj = {
+    var obj = {
       name: name,
       email: email,
     };
-    console.log(obj);
     localStorage.setItem("user" + email, JSON.stringify(obj));
     addThings(obj);
   }
@@ -40,13 +39,54 @@ function addThings(Objectt) {
     document.createTextNode(`Name: ${Objectt.name} and Email: ${Objectt.email}`)
   );
   users.appendChild(li);
+  let eb = document.createElement('input');
+  eb.type = 'button';
+  eb.id = 'edit'
+  eb.value = 'Edit'
+  li.appendChild(eb)
+  eb.style.margin = "2px"
+  eb.style.marginLeft = "10px"
+  eb.style.border = "2px solid red"
+  eb.style.padding = "2px"
+  eb.addEventListener('click', () => {
+    document.getElementById("name").value = Objectt.name;
+    document.getElementById("email").value = Objectt.email;
+    
+    li.remove();
+  })
+
+
+
+// delete button
+   const db = document.createElement("input")
+   db.value = "Delete";
+   db.type = "Button";
+   db.id = "delete"
+   li.appendChild(db)
+   db.style.border = "2px solid red"
+   db.style.color = "red"
+   db.style.padding = "2px"
+   db.style.marginLeft = "8px"
+   db.addEventListener('click', () => {
+    localStorage.removeItem(`user${Objectt.email}`)
+    
+    li.remove();
+   })
 }
+  
+
+  
+
+
 
 btn.addEventListener("mouseover", (e) => {
   e.preventDefault();
   btn.style.padding = "20px";
 });
+
 btn.addEventListener("mouseout", (e) => {
   e.preventDefault();
   btn.style.color = "yellow";
 });
+
+
